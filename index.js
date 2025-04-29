@@ -1,7 +1,13 @@
 const express = require("express");
 const app = express(); // define express como app
-const connection = require ("./database/database") // importa o banco de dados
 const bodyParser = require ("body-parser") // importa o body-parser
+const connection = require ("./database/database") // importa o banco de dados
+
+const categoriesController = require("./categories/CategoriesController");
+const articlesController = require("./articles/ArticlesController");
+
+const Article = require("./articles/Article")
+const Category = require("./categories/Category")
 
 // view engine - importa o ejs para interpretar códigos html
 app.set("view engine", "ejs");
@@ -21,8 +27,8 @@ connection // faz a conexão com banco de dados
         console.log(error);
     })
 
-app.use("/",categoriesController);
-app.use("/",articlesController);
+app.use("/", categoriesController);
+app.use("/", articlesController);
 
 
 app.get("/", (req,res) => {
